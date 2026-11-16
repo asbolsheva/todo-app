@@ -2,12 +2,49 @@
   box-sizing: border-box;
 }
 
+/* Theme colors. Light is the default; dark overrides via data-theme on <html>. */
+:root {
+  color-scheme: light;
+  --bg: #f3f4f6;
+  --surface: #fff;
+  --text: #1f2937;
+  --muted: #9ca3af;
+  --border: #e5e7eb;
+  --input-border: #d1d5db;
+  --input-bg: #fff;
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --accent-ring: rgba(99, 102, 241, 0.2);
+  --danger: #ef4444;
+  --danger-bg: #fee2e2;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --toggle-hover-bg: #f3f4f6;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111827;
+  --surface: #1f2937;
+  --text: #f3f4f6;
+  --muted: #9ca3af;
+  --border: #374151;
+  --input-border: #4b5563;
+  --input-bg: #111827;
+  --accent: #818cf8;
+  --accent-hover: #6366f1;
+  --accent-ring: rgba(129, 140, 248, 0.3);
+  --danger: #f87171;
+  --danger-bg: rgba(248, 113, 113, 0.15);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --toggle-hover-bg: #374151;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: #f3f4f6;
-  color: #1f2937;
+  background: var(--bg);
+  color: var(--text);
   display: flex;
   justify-content: center;
   padding: 48px 16px;
@@ -16,16 +53,44 @@ body {
 .app {
   width: 100%;
   max-width: 480px;
-  background: #fff;
+  background: var(--surface);
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow);
   padding: 24px;
   align-self: flex-start;
 }
 
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
 h1 {
-  margin: 0 0 20px;
+  margin: 0;
   font-size: 28px;
+}
+
+.theme-toggle {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  background: var(--toggle-hover-bg);
+}
+
+.theme-toggle:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-ring);
 }
 
 .todo-form {
@@ -38,14 +103,16 @@ h1 {
   flex: 1;
   padding: 10px 12px;
   font-size: 16px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--input-border);
   border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--text);
   outline: none;
 }
 
 .todo-form input:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-ring);
 }
 
 .todo-form button {
@@ -53,13 +120,13 @@ h1 {
   font-size: 16px;
   border: none;
   border-radius: 8px;
-  background: #6366f1;
+  background: var(--accent);
   color: #fff;
   cursor: pointer;
 }
 
 .todo-form button:hover {
-  background: #4f46e5;
+  background: var(--accent-hover);
 }
 
 .todo-list {
@@ -73,7 +140,7 @@ h1 {
   align-items: center;
   gap: 12px;
   padding: 12px 4px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border);
 }
 
 .todo-item:last-child {
@@ -84,7 +151,7 @@ h1 {
   width: 18px;
   height: 18px;
   cursor: pointer;
-  accent-color: #6366f1;
+  accent-color: var(--accent);
 }
 
 .todo-text {
@@ -94,13 +161,13 @@ h1 {
 
 .todo-item.done .todo-text {
   text-decoration: line-through;
-  color: #9ca3af;
+  color: var(--muted);
 }
 
 .delete-btn {
   border: none;
   background: transparent;
-  color: #9ca3af;
+  color: var(--muted);
   font-size: 20px;
   line-height: 1;
   cursor: pointer;
@@ -109,13 +176,13 @@ h1 {
 }
 
 .delete-btn:hover {
-  color: #ef4444;
-  background: #fee2e2;
+  color: var(--danger);
+  background: var(--danger-bg);
 }
 
 .empty-message {
   text-align: center;
-  color: #9ca3af;
+  color: var(--muted);
   margin: 8px 0 0;
 }
 
