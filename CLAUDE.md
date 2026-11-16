@@ -28,7 +28,7 @@ The app follows a state → save → render loop:
 
 - State is one in-memory array, `todos`. Each item is `{ id, text, done }`.
 - It is loaded once from `localStorage` on startup. Bad or missing data falls back to `[]`.
-- Every mutation (`addTodo`, `toggleTodo`, `deleteTodo`) changes the array, then calls `saveTodos()`, then calls `render()`.
+- Every mutation (`addTodo`, `toggleTodo`, `deleteTodo`, `clearCompleted`) changes the array, then calls `saveTodos()`, then calls `render()`.
 - `render()` clears the list and rebuilds every `<li>` from the array. There is no partial DOM update.
 - Item IDs are random strings. Handlers find items by ID, not by index.
 - Task text is set with `textContent`, never `innerHTML`. Keep it that way to avoid XSS.
