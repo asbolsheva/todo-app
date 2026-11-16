@@ -6,6 +6,7 @@ const input = document.getElementById("todo-input");
 const list = document.getElementById("todo-list");
 const emptyMessage = document.getElementById("empty-message");
 const themeToggle = document.getElementById("theme-toggle");
+const clearCompletedBtn = document.getElementById("clear-completed");
 
 // --- Theme ---
 
@@ -92,6 +93,7 @@ function render() {
   });
 
   emptyMessage.hidden = todos.length > 0;
+  clearCompletedBtn.hidden = !todos.some((t) => t.done);
 }
 
 function addTodo(text) {
@@ -114,6 +116,14 @@ function deleteTodo(id) {
   saveTodos();
   render();
 }
+
+function clearCompleted() {
+  todos = todos.filter((t) => !t.done);
+  saveTodos();
+  render();
+}
+
+clearCompletedBtn.addEventListener("click", clearCompleted);
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
